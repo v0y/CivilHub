@@ -132,7 +132,7 @@ urlpatterns += patterns('',
     # comments
     url('^comments/', include('comments.urls', namespace='comments')),
     # admin panel
-    url(r'^fuck-off-i-am-awesome/', include(admin.site.urls)),
+    url(r'^admin/', include(admin.site.urls)),
     # Abuse reports (static)
     url(r'^report/', include('places_core.urls', namespace='reports')),
     # User media

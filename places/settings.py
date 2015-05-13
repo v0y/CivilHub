@@ -34,9 +34,9 @@ LOGGING = loggers.LOGGING
 SECRET_KEY = config['secret_key']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-TEMPLATE_DEBUG = False
+TEMPLATE_DEBUG = DEBUG
 
 INTERNAL_IPS = config['internal_ips']
 
@@ -157,7 +157,7 @@ ROOT_URLCONF = 'places.urls'
 
 WSGI_APPLICATION = 'places.wsgi.application'
 
-SESSION_COOKIE_DOMAIN = '.civilhub.org'
+# SESSION_COOKIE_DOMAIN = '.civilhub.org'
 
 # Django messages framework
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
