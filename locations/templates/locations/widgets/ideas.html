@@ -1,0 +1,13 @@
+Idea: {{ object.name }} <br>
+Opis:
+<p>{{ object.description }}<p>
+
+<p>
+    ups: {{ object.votes_up }}<br>
+    downs: {{ object.votes_down }}<br>
+    coolness: {{ object.note }}
+</p>
+
+{% if object.image %}
+    <img src="{{ object.image_url }}" />
+{% endif %}
