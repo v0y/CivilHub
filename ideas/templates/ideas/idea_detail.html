@@ -11,6 +11,7 @@
       {% if comment.comment|length = 0 %} &nbsp; {% else %} <a class="comment-toggle custom-comments-toggle" data-target="{{ idea.pk }}" href="#">{% trans "Hide comments" %}</a>{% endif %}
     </p>
   </div>
+  {% with idea|content_type as ct %}<div><pre>{% url 'locations:widget' ct.pk idea.pk %}</pre></div>{% endwith %}
   <input type="hidden" id="target-id" value="{{ idea.pk }}" />
   <input type="hidden" id="target-label" value="ideas" />
   <input type="hidden" id="target-type" value="{% obj_ct_id 'idea' %}" />

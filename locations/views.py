@@ -5,6 +5,7 @@ import os
 
 from dateutil.relativedelta import relativedelta
 
+from django.template.base import TemplateDoesNotExist
 from django.shortcuts import render, get_object_or_404, redirect, render_to_response
 from django.http import HttpResponse, HttpResponseForbidden, HttpResponseNotFound, \
                         Http404
@@ -739,3 +740,19 @@ class RemoveModeratorView(ModeratorListAccessMixin):
         if self.location in user.profile.mod_areas.all():
             user.profile.mod_areas.remove(self.location)
         return redirect(self.get_success_url())
+
+
+class ServeContentView(View):
+    """ Serve locations content objects.
+    """
+    def get(self, request, **kwargs):
+        ct = ContentType.objects.get(pk=self.kwargs.get('ct'))
+        pk = self.kwargs.get('pk')
+        self.object = ct.get_object_for_this_type(pk=pk)
+        try:
+            render(request, self.get_template_name(), {'object': self.object})
+        except TemplateDoesNotExist:
+            raise Http404
+
+    def get_template_name(self):
+        return 'locations/widgets/{}.html'.format(self.object._meta.model_name)
