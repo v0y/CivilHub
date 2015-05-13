@@ -1,13 +1,21 @@
-Idea: {{ object.name }} <br>
-Opis:
-<p>{{ object.description }}<p>
+{% load i18n %}
 
-<p>
-    ups: {{ object.votes_up }}<br>
-    downs: {{ object.votes_down }}<br>
-    coolness: {{ object.note }}
-</p>
+<h1 class="text-center">{{ object.name }}</h1>
 
-{% if object.image %}
-    <img src="{{ object.image_url }}" />
+<div class="idea-summary acticle-content clearfix">
+    {{ object.get_description|safe }}
+</div>
+
+<div class="ivotes text-center col-md-6 col-sm-12 mb20">
+    <h2>{{ object.vote_set.count }}</h2>
+    <p>{% trans "Total vote"%}</p>
+</div>
+
+<div class="ivotes text-center col-md-6 col-sm-12 mb20">
+    <h2>{{ object.note }}</h2>
+    <p>{% trans "Positive votes"%}</p>
+</div>
+
+{% if not object.has_default_image %}
+    <div class="content-image bigImg4" data-jslghtbx="{{ object.image.url }}">&nbsp;</div>
 {% endif %}
